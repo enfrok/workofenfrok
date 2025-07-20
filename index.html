@@ -1,111 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Token Number Entry</title>
-<style>
-  body {
-    margin: 0;
-    background-color: black;
-    color: white;
-    font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    text-align: center;
-  }
-  h1 {
-    font-weight: 600;
-    margin-bottom: 0.3em;
-    font-size: 2.5rem;
-  }
-  p {
-    margin-top: 0;
-    margin-bottom: 1.5em;
-    font-size: 1.1rem;
-    opacity: 0.8;
-  }
-  input[type="text"] {
-    padding: 0.75em 1em;
-    font-size: 1.1rem;
-    border-radius: 6px;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1.5em;
-    outline: none;
-    box-sizing: border-box;
-  }
-  input[type="text"]::placeholder {
-    color: #999;
-  }
-  button {
-    background-color: #0a84ff;
-    border: none;
-    color: white;
-    font-size: 1.1rem;
-    padding: 0.75em 2em;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background-color: #0066cc;
-  }
-  .error-message {
-    color: #ff4d4d;
-    margin-top: 1em;
-    font-weight: 600;
-    display: none;
-  }
-  /* Info display styles */
-  #info-container {
-    max-width: 600px;
-    width: 100%;
-    margin-top: 20px;
-    display: none;
-    gap: 40px;
-  }
-  .info-container {
-    display: flex;
-    gap: 40px;
-  }
-  .info-labels {
-    flex: 1;
-    color: #999; /* grey */
-    font-weight: 600;
-    line-height: 1.6;
-  }
-  .info-values {
-    flex: 1;
-    color: white;
-    line-height: 1.6;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Token Verification</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .centered {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2.3rem;
+      margin-bottom: 0.3em;
+    }
+
+    p {
+      font-size: 1.05rem;
+      opacity: 0.85;
+    }
+
+    input[type="text"] {
+      padding: 0.75em 1em;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      border: none;
+      width: 100%;
+      max-width: 360px;
+      margin-top: 1.2em;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]::placeholder {
+      color: #999;
+    }
+
+    button {
+      background-color: #0a84ff;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      padding: 0.75em 2em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1.2em;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0066cc;
+    }
+
+    .error-message {
+      color: #ff4d4d;
+      font-weight: 600;
+      margin-top: 1em;
+      display: none;
+    }
+
+    .info-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .info-box {
+      display: flex;
+      gap: 40px;
+      max-width: 700px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .info-labels {
+      flex: 1;
+      color: #888;
+      font-weight: 600;
+      text-align: right;
+      padding-right: 20px;
+    }
+
+    .info-values {
+      flex: 1;
+      color: white;
+      text-align: left;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .detail-section {
+      max-width: 750px;
+      margin: 100px auto 60px;
+      padding: 0 20px;
+    }
+
+    .detail-section h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .detail-section p {
+      font-size: 1.05rem;
+      color: #ccc;
+    }
+
+  </style>
 </head>
 <body>
-  <div id="form-container">
-    <h2>Please enter your Token Number</h2>
-    <p>To know about your ratings and working code, please enter your token number to continue.</p>
+  <div class="centered fade-in" id="formSection">
+    <h1>Please enter your Token Number</h1>
+    <p>To start your work, enter the Token Number.</p>
     <input type="text" placeholder="Enter your Token Number" id="tokenInput" />
     <button id="continueBtn">Continue</button>
     <div class="error-message" id="errorMsg">Token is incorrect.</div>
   </div>
 
-  <div id="info-container">
-    <div class="info-container">
+  <div class="info-section fade-in" id="infoSection">
+    <div class="info-box">
       <div class="info-labels">
         <p>Registered Name:</p>
         <p>Token Number:</p>
@@ -117,6 +156,18 @@
       </div>
       <div class="info-values" id="infoValues"></div>
     </div>
+  </div>
+
+  <div class="detail-section fade-in">
+    <h2>An Important Detail</h2>
+    <p>
+      Token Codes assigned to employees are strictly confidential and must be protected at all times.
+      Under no circumstances should the Token Codes of Enfronisment be shared or distributed to other
+      unknown or unauthorized Enfronisment without a clear and valid reason. Sharing such sensitive
+      access information without proper authorization may lead to security risks and breaches of protocol.
+      However, Token Codes of Enfronisment may be shared with Manager Chandan Paul, as he is officially
+      responsible for overseeing and editing the Operating System.
+    </p>
   </div>
 
   <script>
@@ -144,16 +195,16 @@
     const button = document.getElementById('continueBtn');
     const input = document.getElementById('tokenInput');
     const errorMsg = document.getElementById('errorMsg');
-    const formContainer = document.getElementById('form-container');
-    const infoContainer = document.getElementById('info-container');
+    const infoSection = document.getElementById('infoSection');
     const infoValues = document.getElementById('infoValues');
+    const formSection = document.getElementById('formSection');
 
     button.addEventListener('click', () => {
       const token = input.value.trim().toUpperCase();
       if (validTokens[token]) {
         errorMsg.style.display = 'none';
-        formContainer.style.display = 'none';
-        infoContainer.style.display = 'block';
+        formSection.style.display = 'none';
+        infoSection.style.display = 'flex';
 
         const info = validTokens[token];
         infoValues.innerHTML = `
@@ -169,6 +220,17 @@
         errorMsg.style.display = 'block';
       }
     });
+
+    // Fade-in animations on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
