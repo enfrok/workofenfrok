@@ -1,86 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enter Token</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=San+Francisco:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'San Francisco', sans-serif;
+    }
+
+    body {
       background-color: black;
       color: white;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       flex-direction: column;
-      overflow: hidden;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding-top: 100px;
+      scroll-behavior: smooth;
     }
 
-    .container {
+    .token-box {
       text-align: center;
-      animation: fadeIn 1s ease-in-out;
+      margin-bottom: 50px;
+      animation: fadeIn 1s ease forwards;
     }
 
     h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
+      font-size: 24px;
       margin-bottom: 10px;
     }
 
     p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 30px;
-    }
-
-    input {
-      padding: 15px;
-      width: 300px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
       margin-bottom: 20px;
     }
 
-    button {
-      padding: 12px 30px;
-      font-size: 1rem;
-      background-color: #007aff;
-      color: white;
+    input {
+      padding: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 300px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: grey;
+      color: white;
+      border-radius: 5px;
+      margin-left: 10px;
       cursor: pointer;
     }
 
     .error {
       color: red;
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
-    .fade {
-      opacity: 0;
-      animation: fadeIn 1s ease-in-out forwards;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    .info {
+    .details {
       display: flex;
       justify-content: space-between;
       width: 80%;
       margin-top: 50px;
-      text-align: left;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .left, .right {
+      width: 45%;
+      white-space: pre-line;
     }
 
     .left {
       color: grey;
-      font-weight: 500;
     }
 
     .right {
@@ -88,85 +86,83 @@
       text-align: right;
     }
 
-    .disclaimer {
-      margin-top: 40px;
-      padding: 20px;
-      background-color: #111;
-      border-radius: 10px;
+    .info-box {
+      background-color: #1e1e1e;
+      padding: 30px;
       width: 80%;
-      animation: fadeIn 2s ease-in-out;
+      margin: 50px auto;
+      border-radius: 10px;
+      animation: fadeIn 1s ease forwards;
     }
 
-    .disclaimer h3 {
+    .info-box h2 {
+      color: white;
+      margin-bottom: 20px;
       font-weight: bold;
+    }
+
+    .info-box p {
+      color: grey;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
-  <div class="container" id="loginBox">
-    <h1 class="fade">Please enter your Token Number</h1>
-    <p class="fade">To start your work, enter the Token Number.</p>
-    <input type="text" id="tokenInput" placeholder="Enter your Token Number" />
-    <br />
+  <div class="token-box">
+    <h1>Please enter your Token Number</h1>
+    <p>To start your work, enter the Token Number.</p>
+    <input type="text" id="tokenInput" placeholder="Enter your Token Number">
     <button onclick="checkToken()">Continue</button>
-    <div id="errorMsg" class="error"></div>
+    <div class="error" id="error"></div>
   </div>
 
-  <div id="workDetails" style="display: none;" class="fade">
-    <div class="info">
-      <div class="left">
-        Registered Name:<br>
-        Token Number:<br>
-        Work:<br>
-        Total ratings:<br>
-        Working Date:<br>
-        Working Duration:<br>
-        Working type:
-      </div>
-      <div class="right" id="detailsRight"></div>
-    </div>
-    <div class="disclaimer fade">
-      <h3>An Important Detail</h3>
-      <p>
-        Token Codes assigned to employees are strictly confidential and must be protected at all times. Under no circumstances should the Token Codes of Enfronisment be shared or distributed to other unknown or unauthorized Enfronisment without a clear and valid reason. Sharing such sensitive access information without proper authorization may lead to security risks and breaches of protocol. However, Token Codes of Enfronisment may be shared with Manager Chandan Paul, as he is officially responsible for overseeing and editing the Operating System.
-      </p>
-    </div>
+  <div class="details" id="details" style="display: none;">
+    <div class="left" id="leftData"></div>
+    <div class="right" id="rightData"></div>
+  </div>
+
+  <div class="info-box" id="infoBox" style="display: none;">
+    <h2>An Important Detail</h2>
+    <p>
+      Token Codes assigned to employees are strictly confidential and must be protected at all times.
+      Under no circumstances should the Token Codes of Enfronisment be shared or distributed to other
+      unknown or unauthorized Enfronisment without a clear and valid reason. Sharing such sensitive access
+      information without proper authorization may lead to security risks and breaches of protocol.
+      However, Token Codes of Enfronisment may be shared with Manager Chandan Paul, as he is officially
+      responsible for overseeing and editing the Operating System.
+    </p>
   </div>
 
   <script>
-    const tokens = {
-      MANASA881: [
-        "MANASA JAYANTHI",
-        "MANASA881",
-        "EDITING ENFROK WEBSITE",
-        "N.A.",
-        "28 SEPTEMBER 2025",
-        "2:30 HOURS (5:00 PM TO 7:30 PM)",
-        "WEBSITE-EDIT"
-      ],
-      CHANDAN882: [
-        "CHANDAN PAUL",
-        "CHANDAN882",
-        "CODING AN OS",
-        "N.A.",
-        "28 SEPTEMBER 2025",
-        "3:30 HOURS (5 PM TO 8:30 PM)",
-        "CODE-EDIT"
-      ]
-    };
-
     function checkToken() {
-      const input = document.getElementById('tokenInput').value.trim().toUpperCase();
-      const error = document.getElementById('errorMsg');
+      const token = document.getElementById('tokenInput').value.trim();
+      const error = document.getElementById('error');
+      const leftData = document.getElementById('leftData');
+      const rightData = document.getElementById('rightData');
+      const details = document.getElementById('details');
+      const infoBox = document.getElementById('infoBox');
 
-      if (tokens[input]) {
-        document.getElementById('loginBox').style.display = 'none';
-        const details = tokens[input];
-        const right = document.getElementById('detailsRight');
-        right.innerHTML = details.join('<br>');
-        document.getElementById('workDetails').style.display = 'block';
+      if (token === 'MANASA881') {
+        error.innerText = '';
+        leftData.innerText = `Registered Name:\nToken Number:\nWork:\nTotal ratings:\nWorking Date:\nWorking Duration:\nWorking type:`;
+        rightData.innerText = `MANASA JAYANTHI\nMANASA881\nEDITING ENFROK WEBSITE\nN.A.\n28 SEPTEMBER 2025\n2:30 HOURS (5:00 PM TO 7:30 PM)\nWEBSITE-EDIT`;
+        details.style.display = 'flex';
+        infoBox.style.display = 'block';
+      } else if (token === 'CHANDAN882') {
+        error.innerText = '';
+        leftData.innerText = `Registered Name:\nToken Number:\nWork:\nTotal ratings:\nWorking Date:\nWorking Duration:\nWorking type:`;
+        rightData.innerText = `CHANDAN PAUL\nCHANDAN882\nCODING AN OS\nN.A.\n28 SEPTEMBER 2025\n3:30 HOURS (5 PM TO 8:30 PM)\nCODE-EDIT`;
+        details.style.display = 'flex';
+        infoBox.style.display = 'block';
       } else {
-        error.textContent = "Token is incorrect.";
+        error.innerText = 'Token is incorrect.';
+        details.style.display = 'none';
+        infoBox.style.display = 'none';
       }
     }
   </script>
