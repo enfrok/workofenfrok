@@ -115,7 +115,7 @@
 <body>
   <div class="token-box">
     <h1>Please enter your Token Number</h1>
-    <p>To start your work, enter the Token Number.</p>
+    <p>To know about your ratings, work or working duration please enter the Token Number.</p>
     <input type="text" id="tokenInput" placeholder="Enter your Token Number">
     <button onclick="checkToken()">Continue</button>
     <div class="error" id="error"></div>
@@ -132,9 +132,8 @@
       Token Codes assigned to employees are strictly confidential and must be protected at all times.
       Under no circumstances should the Token Codes of Enfronisment be shared or distributed to other
       unknown or unauthorized Enfronisment without a clear and valid reason. Sharing such sensitive access
-      information without proper authorization may lead to security risks and breaches of protocol.
-      However, Token Codes of Enfronisment may be shared with Manager Chandan Paul, as he is officially
-      responsible for overseeing and editing the Operating System.
+      information without proper authorization may lead to security risks and breaches of protocol. Please keep
+      your Token Number private as Enfrok won't take any responsibility once token is Stolen.
     </p>
   </div>
 
@@ -150,13 +149,13 @@
       if (token === 'MANASA881') {
         error.innerText = '';
         leftData.innerText = `Registered Name:\nToken Number:\nWork:\nTotal ratings:\nWorking Date:\nWorking Duration:\nWorking type:`;
-        rightData.innerText = `MANASA JAYANTHI\nMANASA881\nEDITING ENFROK WEBSITE\nN.A.\n28 SEPTEMBER 2025\n2:30 HOURS (5:00 PM TO 7:30 PM)\nWEBSITE-EDIT`;
+        rightData.innerText = `MANASA JAYANTHI\nMANASA881\nEDITING ENFROK WEBSITE\nNo setup found.\n28 SEPTEMBER 2025\n2:30 HOURS (5:00 PM TO 7:30 PM)\nWEBSITE-EDIT`;
         details.style.display = 'flex';
         infoBox.style.display = 'block';
       } else if (token === 'CHANDAN882') {
         error.innerText = '';
         leftData.innerText = `Registered Name:\nToken Number:\nWork:\nTotal ratings:\nWorking Date:\nWorking Duration:\nWorking type:`;
-        rightData.innerText = `CHANDAN PAUL\nCHANDAN882\nCODING AN OS\nN.A.\n28 SEPTEMBER 2025\n3:30 HOURS (5 PM TO 8:30 PM)\nCODE-EDIT`;
+        rightData.innerText = `CHANDAN PAUL\nCHANDAN882\nOPERATING SYSTEM\nN.A.\n28 SEPTEMBER 2025\n3:30 HOURS (5 PM TO 8:30 PM)\nCODE-EDIT`;
         details.style.display = 'flex';
         infoBox.style.display = 'block';
       } else {
